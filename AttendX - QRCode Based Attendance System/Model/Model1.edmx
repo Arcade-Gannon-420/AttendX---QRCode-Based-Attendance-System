@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AttendXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AttendX.dbo.T_AttendanceRecordMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T_AttendanceRecordMaster">
+          <Key>
+            <PropertyRef Name="arm_AttendanceID" />
+          </Key>
+          <Property Name="arm_AttendanceID" Type="int" Nullable="false" />
+          <Property Name="arm_ID" Type="int" />
+          <Property Name="arm_EnrollmentID" Type="int" />
+          <Property Name="arm_Date" Type="date" />
+          <Property Name="arm_TimeIn" Type="time" Precision="7" />
+          <Property Name="arm_TimeOut" Type="time" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AttendX.dbo.T_StudentsAccountMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T_StudentsAccountMaster">
+          <Key>
+            <PropertyRef Name="sam_ID" />
+          </Key>
+          <Property Name="sam_ID" Type="int" Nullable="false" />
+          <Property Name="sam_Firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="sam_Lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="sam_Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="sam_Course" Type="nvarchar" MaxLength="10" />
+          <Property Name="sam_Year" Type="nvarchar" MaxLength="10" />
+          <Property Name="sam_SchoolYear" Type="nvarchar" MaxLength="10" />
+          <Property Name="sam_Semester" Type="nvarchar" MaxLength="10" />
+          <Property Name="sam_Photo" Type="image" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AttendX.dbo.T_SubjectEnrollment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T_SubjectEnrollment">
+          <Key>
+            <PropertyRef Name="se_EnrollmentID" />
+            <PropertyRef Name="se_EDPCode" />
+            <PropertyRef Name="se_Status" />
+          </Key>
+          <Property Name="se_EnrollmentID" Type="int" Nullable="false" />
+          <Property Name="se_EDPCode" Type="int" Nullable="false" />
+          <Property Name="se_Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_SubjectMaster">
+          <Key>
+            <PropertyRef Name="sm_EDPCode" />
+          </Key>
+          <Property Name="sm_EDPCode" Type="int" Nullable="false" />
+          <Property Name="sm_Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sm_SubjectCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="sm_Units" Type="int" Nullable="false" />
+          <Property Name="sm_Schedule" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sm_StartTime" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sm_EndTime" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sm_Course" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_UserMaster">
+          <Key>
+            <PropertyRef Name="um_ID" />
+          </Key>
+          <Property Name="um_ID" Type="int" Nullable="false" />
+          <Property Name="um_Username" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="um_Password" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="um_Firstname" Type="char" MaxLength="50" />
+          <Property Name="um_Lastname" Type="char" MaxLength="50" />
+          <Property Name="um_Grant" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="um_Status" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="AttendXModelStoreContainer">
+          <EntitySet Name="T_SubjectMaster" EntityType="Self.T_SubjectMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_UserMaster" EntityType="Self.T_UserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_AttendanceRecordMaster" EntityType="Self.T_AttendanceRecordMaster" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_AttendanceRecordMaster].[arm_AttendanceID] AS [arm_AttendanceID], 
+    [T_AttendanceRecordMaster].[arm_ID] AS [arm_ID], 
+    [T_AttendanceRecordMaster].[arm_EnrollmentID] AS [arm_EnrollmentID], 
+    [T_AttendanceRecordMaster].[arm_Date] AS [arm_Date], 
+    [T_AttendanceRecordMaster].[arm_TimeIn] AS [arm_TimeIn], 
+    [T_AttendanceRecordMaster].[arm_TimeOut] AS [arm_TimeOut]
+    FROM [dbo].[T_AttendanceRecordMaster] AS [T_AttendanceRecordMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_StudentsAccountMaster" EntityType="Self.T_StudentsAccountMaster" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_StudentsAccountMaster].[sam_ID] AS [sam_ID], 
+    [T_StudentsAccountMaster].[sam_Firstname] AS [sam_Firstname], 
+    [T_StudentsAccountMaster].[sam_Lastname] AS [sam_Lastname], 
+    [T_StudentsAccountMaster].[sam_Gender] AS [sam_Gender], 
+    [T_StudentsAccountMaster].[sam_Course] AS [sam_Course], 
+    [T_StudentsAccountMaster].[sam_Year] AS [sam_Year], 
+    [T_StudentsAccountMaster].[sam_SchoolYear] AS [sam_SchoolYear], 
+    [T_StudentsAccountMaster].[sam_Semester] AS [sam_Semester], 
+    [T_StudentsAccountMaster].[sam_Photo] AS [sam_Photo]
+    FROM [dbo].[T_StudentsAccountMaster] AS [T_StudentsAccountMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_SubjectEnrollment" EntityType="Self.T_SubjectEnrollment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_SubjectEnrollment].[se_EnrollmentID] AS [se_EnrollmentID], 
+    [T_SubjectEnrollment].[se_EDPCode] AS [se_EDPCode], 
+    [T_SubjectEnrollment].[se_Status] AS [se_Status]
+    FROM [dbo].[T_SubjectEnrollment] AS [T_SubjectEnrollment]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AttendXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_SubjectMaster">
+          <Key>
+            <PropertyRef Name="sm_EDPCode" />
+          </Key>
+          <Property Name="sm_EDPCode" Type="Int32" Nullable="false" />
+          <Property Name="sm_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sm_SubjectCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sm_Units" Type="Int32" Nullable="false" />
+          <Property Name="sm_Schedule" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sm_StartTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sm_EndTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sm_Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_UserMaster">
+          <Key>
+            <PropertyRef Name="um_ID" />
+          </Key>
+          <Property Name="um_ID" Type="Int32" Nullable="false" />
+          <Property Name="um_Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="um_Password" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="um_Firstname" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="um_Lastname" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="um_Grant" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="um_Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_AttendanceRecordMaster">
+          <Key>
+            <PropertyRef Name="arm_AttendanceID" />
+          </Key>
+          <Property Name="arm_AttendanceID" Type="Int32" Nullable="false" />
+          <Property Name="arm_ID" Type="Int32" />
+          <Property Name="arm_EnrollmentID" Type="Int32" />
+          <Property Name="arm_Date" Type="DateTime" Precision="0" />
+          <Property Name="arm_TimeIn" Type="Time" Precision="7" />
+          <Property Name="arm_TimeOut" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="T_StudentsAccountMaster">
+          <Key>
+            <PropertyRef Name="sam_ID" />
+          </Key>
+          <Property Name="sam_ID" Type="Int32" Nullable="false" />
+          <Property Name="sam_Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sam_Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sam_Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sam_Course" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sam_Year" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sam_SchoolYear" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sam_Semester" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sam_Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="T_SubjectEnrollment">
+          <Key>
+            <PropertyRef Name="se_EnrollmentID" />
+            <PropertyRef Name="se_EDPCode" />
+            <PropertyRef Name="se_Status" />
+          </Key>
+          <Property Name="se_EnrollmentID" Type="Int32" Nullable="false" />
+          <Property Name="se_EDPCode" Type="Int32" Nullable="false" />
+          <Property Name="se_Status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="AttendXEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_SubjectMaster" EntityType="Self.T_SubjectMaster" />
+          <EntitySet Name="T_UserMaster" EntityType="Self.T_UserMaster" />
+          <EntitySet Name="T_AttendanceRecordMaster" EntityType="Self.T_AttendanceRecordMaster" />
+          <EntitySet Name="T_StudentsAccountMaster" EntityType="Self.T_StudentsAccountMaster" />
+          <EntitySet Name="T_SubjectEnrollment" EntityType="Self.T_SubjectEnrollment" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AttendXModelStoreContainer" CdmEntityContainer="AttendXEntities">
+          <EntitySetMapping Name="T_SubjectMaster">
+            <EntityTypeMapping TypeName="AttendXModel.T_SubjectMaster">
+              <MappingFragment StoreEntitySet="T_SubjectMaster">
+                <ScalarProperty Name="sm_EDPCode" ColumnName="sm_EDPCode" />
+                <ScalarProperty Name="sm_Title" ColumnName="sm_Title" />
+                <ScalarProperty Name="sm_SubjectCode" ColumnName="sm_SubjectCode" />
+                <ScalarProperty Name="sm_Units" ColumnName="sm_Units" />
+                <ScalarProperty Name="sm_Schedule" ColumnName="sm_Schedule" />
+                <ScalarProperty Name="sm_StartTime" ColumnName="sm_StartTime" />
+                <ScalarProperty Name="sm_EndTime" ColumnName="sm_EndTime" />
+                <ScalarProperty Name="sm_Course" ColumnName="sm_Course" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_UserMaster">
+            <EntityTypeMapping TypeName="AttendXModel.T_UserMaster">
+              <MappingFragment StoreEntitySet="T_UserMaster">
+                <ScalarProperty Name="um_ID" ColumnName="um_ID" />
+                <ScalarProperty Name="um_Username" ColumnName="um_Username" />
+                <ScalarProperty Name="um_Password" ColumnName="um_Password" />
+                <ScalarProperty Name="um_Firstname" ColumnName="um_Firstname" />
+                <ScalarProperty Name="um_Lastname" ColumnName="um_Lastname" />
+                <ScalarProperty Name="um_Grant" ColumnName="um_Grant" />
+                <ScalarProperty Name="um_Status" ColumnName="um_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_AttendanceRecordMaster">
+            <EntityTypeMapping TypeName="AttendXModel.T_AttendanceRecordMaster">
+              <MappingFragment StoreEntitySet="T_AttendanceRecordMaster">
+                <ScalarProperty Name="arm_AttendanceID" ColumnName="arm_AttendanceID" />
+                <ScalarProperty Name="arm_ID" ColumnName="arm_ID" />
+                <ScalarProperty Name="arm_EnrollmentID" ColumnName="arm_EnrollmentID" />
+                <ScalarProperty Name="arm_Date" ColumnName="arm_Date" />
+                <ScalarProperty Name="arm_TimeIn" ColumnName="arm_TimeIn" />
+                <ScalarProperty Name="arm_TimeOut" ColumnName="arm_TimeOut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_StudentsAccountMaster">
+            <EntityTypeMapping TypeName="AttendXModel.T_StudentsAccountMaster">
+              <MappingFragment StoreEntitySet="T_StudentsAccountMaster">
+                <ScalarProperty Name="sam_ID" ColumnName="sam_ID" />
+                <ScalarProperty Name="sam_Firstname" ColumnName="sam_Firstname" />
+                <ScalarProperty Name="sam_Lastname" ColumnName="sam_Lastname" />
+                <ScalarProperty Name="sam_Gender" ColumnName="sam_Gender" />
+                <ScalarProperty Name="sam_Course" ColumnName="sam_Course" />
+                <ScalarProperty Name="sam_Year" ColumnName="sam_Year" />
+                <ScalarProperty Name="sam_SchoolYear" ColumnName="sam_SchoolYear" />
+                <ScalarProperty Name="sam_Semester" ColumnName="sam_Semester" />
+                <ScalarProperty Name="sam_Photo" ColumnName="sam_Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_SubjectEnrollment">
+            <EntityTypeMapping TypeName="AttendXModel.T_SubjectEnrollment">
+              <MappingFragment StoreEntitySet="T_SubjectEnrollment">
+                <ScalarProperty Name="se_EnrollmentID" ColumnName="se_EnrollmentID" />
+                <ScalarProperty Name="se_EDPCode" ColumnName="se_EDPCode" />
+                <ScalarProperty Name="se_Status" ColumnName="se_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
