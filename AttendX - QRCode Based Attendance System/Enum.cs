@@ -9,6 +9,19 @@ namespace AttendX___QRCode_Based_Attendance_System
     internal class Enum
     {
     }
+    public static class UserTitle
+    {
+        public const string Instructor = "I";
+        public const string LaboratorySupervisor = "L";
+        public const string WorkingStudent = "W";
+        public static string Display(this string value)
+        {
+            return value == "I" ? "Instructor"
+                  : value == "L" ? "LaboratorySupervisor"
+                  : value == "W" ? "WorkingStudent"
+                  : string.Empty;
+        }
+    }
     public static class UserStatus
     {
         public const string Active = "A";

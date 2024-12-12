@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendX___QRCode_Based_Attendance_System.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,12 @@ namespace AttendX___QRCode_Based_Attendance_System
 {
     public partial class Form1 : Form
     {
+        public AttendXEntities db = new AttendXEntities();
         public Form1()
         {
             InitializeComponent();
         }
+        
+
     }
 }
